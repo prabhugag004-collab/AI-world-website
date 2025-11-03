@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI World 2050 | The Future of Human + Machine Intelligence</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+  <style>
+    :root {
+      --color-primary: #00eaff;
+      --color-secondary: #0078ff;
+      --color-dark: #0b0f22;
+      --color-text: #e0e0e0;
+      --color-accent: #ff4081;
+      --gradient-button: linear-gradient(45deg, var(--color-primary), var(--color-secondary));
+    }
+    *{margin:0;padding:0;box-sizing:border-box;}
+    body{
+      font-family:"Montserrat",sans-serif;
+      background-color:var(--color-dark);
+      color:var(--color-text);
+      overflow-x:hidden;
+      scroll-behavior:smooth;
+    }
+
+    /* Background effects */
+    #particle-bg{
+      position:fixed;
+      top:0;left:0;
+      width:100%;height:100%;
+      z-index:-2;
+    }
+    .gradient-overlay{
+      position:fixed;top:0;left:0;
+      width:100%;height:100%;
+      background:linear-gradient(45deg,rgba(0,122,255,0.2),rgba(0,0,0,0.6),rgba(0,234,255,0.2));
+      background-size:400% 400%;
+      animation:gradientShift 18s ease infinite;
+      z-index:-1;
+    }
+    @keyframes gradientShift{
+      0%{background-position:0% 50%;}
+      50%{background-position:100% 50%;}
+      100%{background-position:0% 50%;}
+    }
+
+    /* Navbar */
+    .navbar{
+      position:fixed;top:0;width:100%;z-index:999;
+      display:flex;justify-content:space-between;align-items:center;
+      padding:1rem 3rem;
+      background:rgba(10,15,40,0.8);
+      backdrop-filter:blur(10px);
+    }
+    .logo a{font-size:1.8rem;font-weight:700;color:#fff;}
+    .nav-links{display:flex;list-style:none;}
+    .nav-links li{margin-left:2rem;}
+    .nav-links a{color:var(--color-text);font-weight:600;position:relative;}
+    .nav-links a::after{
+      content:"";position:absolute;bottom:-5px;left:0;width:0;height:2px;background:var(--color-primary);
+      transition:width .3s;
+    }
+    .nav-links a:hover::after{width:100%;}
+    .burger{display:none;cursor:pointer;}
+    .burger div{width:25px;height:3px;background:var(--color-text);margin:5px;transition:.3s;}
+    .burger.toggle .line1{transform:rotate(-45deg) translate(-5px,6px);}
+    .burger.toggle .line2{opacity:0;}
+    .burger.toggle .line3{transform:rotate(45deg) translate(-5px,-6px);}
+    @media(max-width:768px){
+      .burger{display:block;}
+      .nav-links{
+        position:absolute;top:70px;right:0;width:70%;height:100vh;
+        flex-direction:column;align-items:center;justify-content:center;
+        background:rgba(10,15,40,0.95);
+        transform:translateX(100%);
+        transition:transform .4s ease;
+      }
+      .nav-links.nav-active{transform:translateX(0);}
+      .nav-links li{margin:1.5rem 0;}
+    }
+
+    /* Hero */
+    .hero-section{
+      height:100vh;
+      background:url('https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+      position:relative;display:flex;align-items:center;justify-content:center;
+    }
+    .hero-section::before{
+      content:"";position:absolute;inset:0;background:rgba(0,0,0,0.75);
+    }
+    .hero-content{
+      position:relative;text-align:center;z-index:2;max-width:850px;
+    }
+    .hero-content h1{
+      font-size:3.8rem;line-height:1.2;
+      background:-webkit-linear-gradient(45deg,var(--color-primary),#fff);
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+    }
+    .hero-content p{margin-top:1rem;font-size:1.1rem;opacity:.9;}
+    .primary-button{
+      display:inline-block;margin-top:1.5rem;
+      padding:.8rem 2rem;
+      border-radius:40px;
+      background:var(--gradient-button);
+      color:#0b0f22;font-weight:700;
+      transition:.3s;
+    }
+    .primary-button:hover{transform:translateY(-3px);opacity:.9;}
+
+    main{padding-top:6rem;}
+
+    section{
+      padding:6rem 2rem;
+      position:relative;
+      text-align:center;
+    }
+    h2{font-size:2.3rem;color:#fff;margin-bottom:1rem;}
+    p{max-width:850px;margin:0 auto 2rem;}
+
+    .grid{
+      display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+      gap:2rem;margin-top:3rem;
+    }
+    .card{
+      background:rgba(20,25,55,0.8);
+      padding:2rem;
+      border-radius:12px;
+      border:1px solid rgba(0,234,255,0.2);
+      transition:.4s;
+    }
+    .card:hover{
+      transform:translateY(-10px);
+      box-shadow:0 0 20px rgba(0,234,255,0.3);
+    }
+
+    /* New visual sections */
+    .image-block{
+      width:100%;height:400px;margin-top:3rem;
+      background-size:cover;background-position:center;
+      border-radius:12px;
+      position:relative;overflow:hidden;
+    }
+    .image-block::after{
+      content:"";position:absolute;inset:0;
+      background:rgba(0,0,0,0.5);
+    }
+
+    .footer{
+      background:#050818;
+      text-align:center;
+      padding:2rem 1rem;
+      font-size:.9rem;
+      opacity:.8;
+    }
+  </style>
+</head>
+<body>
+<canvas id="particle-bg"></canvas>
+<div class="gradient-overlay"></div>
+
+<nav class="navbar">
+  <div class="logo"><a href="#">AI <strong>WORLD</strong></a></div>
+  <ul class="nav-links">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#daily">AI in Daily Life</a></li>
+    <li><a href="#creative">Creative Intelligence</a></li>
+    <li><a href="#quantum">Quantum AI</a></li>
+    <li><a href="#future">Future 2050+</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="burger">
+    <div class="line1"></div>
+    <div class="line2"></div>
+    <div class="line3"></div>
+  </div>
+</nav>
+
+<main>
+  <section class="hero-section" id="home">
+    <div class="hero-content" data-aos="fade-up">
+      <h1>Welcome to AI World 2050</h1>
+      <p>Where humans and machines co-create a smarter, more connected planet. Experience intelligence that learns, feels and evolves.</p>
+      <a href="#future" class="primary-button">Explore the Future</a>
+    </div>
+  </section>
+
+  <section id="daily">
+    <h2 data-aos="fade-right">AI in Everyday Life</h2>
+    <p data-aos="fade-up">From smart homes that predict your mood to wearable assistants that monitor your health — artificial intelligence surrounds us.</p>
+    <div class="grid">
+      <div class="card" data-aos="zoom-in">🏠 <h3>Smart Homes</h3><p>Energy-efficient homes learning from your patterns to save resources.</p></div>
+      <div class="card" data-aos="zoom-in" data-aos-delay="200">⌚ <h3>Health Monitors</h3><p>Real-time diagnostics and personalized wellness guidance.</p></div>
+      <div class="card" data-aos="zoom-in" data-aos-delay="400">📱 <h3>Personal AI Assistants</h3><p>Context-aware digital partners who truly understand you.</p></div>
+    </div>
+    <div class="image-block" style="background-image:url('https://images.unsplash.com/photo-1607746882042-944635dfe10e?auto=format&fit=crop&w=1600&q=80');"></div>
+  </section>
+
+  <section id="creative" style="background:#0e1430;">
+    <h2 data-aos="fade-right">Creative Intelligence</h2>
+    <p data-aos="fade-up">Art, music, storytelling — AI is no longer just analytical; it’s imaginative. It collaborates with artists to design emotions.</p>
+    <div class="grid">
+      <div class="card">🎨 <h3>Generative Art</h3><p>AI generating new visual masterpieces every second.</p></div>
+      <div class="card">🎵 <h3>AI Music</h3><p>Machines composing symphonies inspired by human feelings.</p></div>
+      <div class="card">🎬 <h3>Film & Storytelling</h3><p>AI writers generating scripts and visuals dynamically.</p></div>
+    </div>
+    <div class="image-block" style="background-image:url('https://images.unsplash.com/photo-1527443154391-507e9dc6c5cc?auto=format&fit=crop&w=1600&q=80');"></div>
+  </section>
+
+  <section id="quantum">
+    <h2 data-aos="fade-right">Quantum AI Revolution</h2>
+    <p data-aos="fade-up">Quantum computing meets AI — algorithms learning across multiple realities. Imagine processing the entire internet in seconds.</p>
+    <div class="grid">
+      <div class="card">⚛️ <h3>Quantum Algorithms</h3><p>Learning at speeds traditional silicon can’t comprehend.</p></div>
+      <div class="card">🧠 <h3>Neural Quantum Networks</h3><p>Brains made of qubits unlocking new dimensions of thought.</p></div>
+      <div class="card">💡 <h3>Post-Classical Innovation</h3><p>Building solutions impossible with current physics.</p></div>
+    </div>
+    <div class="image-block" style="background-image:url('https://images.unsplash.com/photo-1581092334651-f1ca3a6b8d5e?auto=format&fit=crop&w=1600&q=80');"></div>
+  </section>
+
+  <section id="future" style="background:#101530;">
+    <h2 data-aos="fade-right">Future 2050+</h2>
+    <p data-aos="fade-up">AI cities that think, medical nanobots, sentient cloud consciousness — humanity and intelligence evolving together.</p>
+    <div class="grid">
+      <div class="card">🏙️ <h3>Self-Learning Cities</h3><p>Urban AI adjusting traffic, energy, and safety dynamically.</p></div>
+      <div class="card">🤖 <h3>Robotic Companions</h3><p>Emotionally intelligent machines becoming everyday friends.</p></div>
+      <div class="card">🌌 <h3>Interplanetary AI</h3><p>Self-sustaining systems guiding space colonization.</p></div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <h2 data-aos="fade-right">Join the Revolution</h2>
+    <p data-aos="fade-up">Are you ready to co-create the intelligent future? Connect with us, share your vision, and let’s build tomorrow together.</p>
+    <a href="mailto:info@aiworld2050.com" class="primary-button">Contact Us</a>
+  </section>
+</main>
+
+<footer class="footer">
+  © 2025 AI World 2050 | Designed with intelligence & imagination 🤖
+</footer>
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script>
+AOS.init({duration:1000,once:true});
+
+// Burger menu
+const burger=document.querySelector('.burger');
+const nav=document.querySelector('.nav-links');
+burger.addEventListener('click',()=>{nav.classList.toggle('nav-active');burger.classList.toggle('toggle');});
+
+// GSAP intro animations
+gsap.from('.navbar',{y:-50,opacity:0,duration:1,ease:"power2.out"});
+gsap.from('.hero-content',{y:50,opacity:0,duration:1.5,delay:0.3,ease:"power3.out"});
+
+// Particles background
+const canvas=document.getElementById('particle-bg');
+const ctx=canvas.getContext('2d');
+let particlesArray;
+function resizeCanvas(){canvas.width=window.innerWidth;canvas.height=window.innerHeight;}
+window.addEventListener('resize',resizeCanvas);
+resizeCanvas();
+
+class Particle{
+  constructor(){
+    this.x=Math.random()*canvas.width;
+    this.y=Math.random()*canvas.height;
+    this.size=Math.random()*2;
+    this.speedX=(Math.random()-0.5)*0.5;
+    this.speedY=(Math.random()-0.5)*0.5;
+  }
+  update(){
+    this.x+=this.speedX;
+    this.y+=this.speedY;
+    if(this.x<0||this.x>canvas.width)this.speedX*=-1;
+    if(this.y<0||this.y>canvas.height)this.speedY*=-1;
+  }
+  draw(){
+    ctx.beginPath();
+    ctx.arc(this.x,this.y,this.size,0,Math.PI*2);
+    ctx.fillStyle="rgba(0,234,255,0.7)";
+    ctx.fill();
+  }
+}
+function initParticles(){
+  particlesArray=[];
+  for(let i=0;i<200;i++){particlesArray.push(new Particle());}
+}
+function animateParticles(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  particlesArray.forEach(p=>{p.update();p.draw();});
+  requestAnimationFrame(animateParticles);
+}
+initParticles();
+animateParticles();
+</script>
+</body>
+</html>
